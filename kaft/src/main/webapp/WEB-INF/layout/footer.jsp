@@ -1,0 +1,1 @@
+Copyright &copy; Pawe&#322 Walesic
