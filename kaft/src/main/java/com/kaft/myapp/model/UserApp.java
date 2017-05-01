@@ -1,16 +1,19 @@
 package com.kaft.myapp.model;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -35,22 +38,42 @@ public class UserApp implements Serializable {
 	@Column(name = "Email")
 	private String email;
 	
-	//Set for @ManyToMany
+	public enum UserStatus{INACTIVE, ACTIVE}
+	
+	@Enumerated(EnumType.STRING)
+	private UserStatus status;
+	
 	
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "UserAddress")
-	private List<UserAddress> userAddress;
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="userApp")
+	private Set<UserAddress> userAddress = new HashSet<UserAddress>(0);
 
-	public UserApp(int id, String userNick, String name, String lastName, String secondName,
-			List<UserAddress> userAddress) {
-		super();
-		Id = id;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.userApp", cascade = CascadeType.ALL)
+	private Set<UserRole> userRoles = new HashSet<UserRole>(0);
+
+	public UserApp(){}
+	
+	public UserApp(String userNick, String name, String lastName, String secondName, String email, UserStatus status){
 		this.userNick = userNick;
 		this.name = name;
 		this.lastName = lastName;
 		this.secondName = secondName;
+		this.email = email;
+		
+		this.status = status;
+	}
+
+	public UserApp(String userNick, String name, String lastName, String secondName, String email,
+			Set<UserAddress> userAddress, Set<UserRole> userRoles, UserStatus status) {
+				
+		this.userNick = userNick;
+		this.name = name;
+		this.lastName = lastName;
+		this.secondName = secondName;
+		this.email = email;
 		this.userAddress = userAddress;
+		this.userRoles = userRoles;
+		this.status = status;
 	}
 
 	public int getId() {
@@ -93,20 +116,36 @@ public class UserApp implements Serializable {
 		this.secondName = secondName;
 	}
 
-	public List<UserAddress> getUserAddress() {
-		return userAddress;
-	}
-
-	public void setUserAddress(List<UserAddress> userAddress) {
-		this.userAddress = userAddress;
-	}
-
 	public String getEmail() {
 		return email;
 	}
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Set<UserAddress> getUserAddress() {
+		return userAddress;
+	}
+
+	public void setUserAddress(Set<UserAddress> userAddress) {
+		this.userAddress = userAddress;
+	}
+
+	public Set<UserRole> getUserRoles() {
+		return userRoles;
+	}
+
+	public void setUserRoles(Set<UserRole> userRoles) {
+		this.userRoles = userRoles;
+	}
+
+	public UserStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(UserStatus status) {
+		this.status = status;
 	}
 
 }

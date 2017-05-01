@@ -1,5 +1,5 @@
 package com.kaft.myapp.model;
-
+/*
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -40,4 +40,4 @@ public class Test {
 		this.user_name = user;
 	}
 	
-}
+}*/
