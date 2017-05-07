@@ -32,5 +32,7 @@ public class WebConfig extends WebMvcConfigurerAdapter{
 		tiles.setCheckRefresh(true);
 		return tiles;
 	}
+	
+	//dodanie springdata
 
 }
