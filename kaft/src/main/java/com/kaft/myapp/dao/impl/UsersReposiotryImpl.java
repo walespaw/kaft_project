@@ -1,27 +1,22 @@
 package com.kaft.myapp.dao.impl;
 /*
-import org.springframework.stereotype.Repository;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+
 
 import com.kaft.myapp.dao.UsersRepository;
 import com.kaft.myapp.model.UserApp;
 
-@Repository
 public class UsersReposiotryImpl implements UsersRepository{
 
-	public void save(UserApp user) {
-		// TODO Auto-generated method stub
-		
-	}
+	@PersistenceContext
+	private EntityManager em;
 
-	public void update(UserApp user) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void delete(UserApp user) {
-		// TODO Auto-generated method stub
-		
-	}
-
-}
-*/
+}*/
