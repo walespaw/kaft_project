@@ -14,6 +14,7 @@ public interface UsersRepository extends JpaRepository<UserApp, Integer> {
 	public List<UserApp> findAllByOrderByIdAsc();
 	//pobranie po adresie email %mail%
 	public List<UserApp> findByEmailContainingIgnoreCase(String mail);
+	//
 	
 	
 }
