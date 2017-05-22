@@ -5,7 +5,6 @@ import java.util.Properties;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
-import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AvailableSettings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -16,10 +15,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.hibernate5.HibernateTransactionManager;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.orm.jpa.JpaTransactionManager;
-import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -54,7 +50,7 @@ public class HibernateConfig {
 	}
 
 */
-	@Bean
+	/*@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean(){
 		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
 		em.setDataSource(getDataSource());
@@ -65,14 +61,28 @@ public class HibernateConfig {
 		em.setJpaProperties(getHibernateProperties());
 		
 		return em;
+	}*/
+	
+	@Bean
+	public EntityManagerFactory entityManagerFactory() throws Exception{
+		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+		vendorAdapter.setGenerateDdl(true);
+		
+		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+		em.setDataSource(getDataSource());
+		em.setPackagesToScan("com.kaft.myapp");
+		em.setJpaVendorAdapter(vendorAdapter);
+		em.setJpaProperties(getHibernateProperties());
+		em.afterPropertiesSet();
+	
+		return em.getObject();
 	}
 	
 	@Bean
-	public PlatformTransactionManager transactionManager(EntityManagerFactory emf){
-		JpaTransactionManager transactionManager = new JpaTransactionManager();
-		transactionManager.setEntityManagerFactory(emf);
-		
-		return transactionManager;
+	public PlatformTransactionManager transactionManager() throws Exception{
+		JpaTransactionManager txManager = new JpaTransactionManager();
+	    txManager.setEntityManagerFactory(entityManagerFactory());
+	    return txManager;
 	}
 	
 	private Properties getHibernateProperties(){
@@ -86,18 +96,11 @@ public class HibernateConfig {
 		return properties;
 	}
 	
-	@Bean
-	@Autowired
-	public HibernateTransactionManager transactionManager(SessionFactory sessionFactory){
-		HibernateTransactionManager txManager = new HibernateTransactionManager();
-		txManager.setSessionFactory(sessionFactory);
-		return txManager;
-	}
-	
-	@Bean
+		
+	/*@Bean
 	public PersistenceExceptionTranslationPostProcessor exceptionTranslation(){
 		return new PersistenceExceptionTranslationPostProcessor();
-	}
+	}*/
 	
 	
 	/*@Bean
@@ -110,12 +113,5 @@ public class HibernateConfig {
 		return jpaTransactionManager;
 	}
 	
-	@Bean
-	public EntityManagerFactory entityManagerFactory(){
-		LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
-		
-		return entityManagerFactoryBean;
-	}
-*/
-	
+*/	
 }
