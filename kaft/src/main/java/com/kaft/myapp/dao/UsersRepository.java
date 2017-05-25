@@ -20,5 +20,5 @@ public interface UsersRepository extends JpaRepository<UserApp, Integer> {
 	public List<UserApp> diffThanUsedName(String usernick);
 	//pobranie użytkownika o podanym loginie lub 
 	@Query(value="select * from usersapp where usernick like '%?1%'or name like '%?2%'", nativeQuery = true )
-	public List<UserApp>getUserByNickOrName(String nick, String name);
+	public List<UserApp> getUserByNickOrName(String nick, String name);
 }

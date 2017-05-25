@@ -3,4 +3,4 @@
 
 <h1>HELLO</h1>
 
-<p>${serverTime}</p>
+<p>${testLogger}</p>
