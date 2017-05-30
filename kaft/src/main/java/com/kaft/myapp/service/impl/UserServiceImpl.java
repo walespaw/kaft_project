@@ -2,6 +2,7 @@ package com.kaft.myapp.service.impl;
 
 import java.text.DateFormat;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,13 +24,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public void save(UserApp userApp) {
-		// usersRepository.save(userApp);
+		usersRepository.save(userApp);
 
 		logger.info("Saving the user at time " + DateFormat.getInstance().format(System.currentTimeMillis()));
 	}
 
 	public void update(UserApp userApp) {
-		// do nothing for ow
+		// do nothing for now
 		logger.info("Updating the user " + userApp.getUserNick() + " at time "
 				+ DateFormat.getInstance().format(System.currentTimeMillis()));
 		// usersRepository.save(userApp);
@@ -56,6 +57,12 @@ public class UserServiceImpl implements UserService {
 		logger.info("Get user/users by nick = " + nick + " or name = " + nick + " at time "
 				+ DateFormat.getInstance().format(System.currentTimeMillis()));
 		return usersRepository.getUserByNickOrName(nick, name);
+	}
+
+	public List<UserApp> findAllUsersWithActiveStatus() {
+		List<UserApp> listOfAll = findAll();
+		List<UserApp> result = listOfAll.stream().filter(user -> UserApp.UserStatus.ACTIVE.equals(user.getStatus())).collect(Collectors.toList()) ;
+		return result;
 	}
 
 }

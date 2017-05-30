@@ -15,4 +15,5 @@ public interface UserService {
 	List<UserApp> findAll();
 	List<UserApp> findByEmailContainingIgnoreCase(String mail);
 	List<UserApp> getUserByNickOrName(String nick, String name);
+	List<UserApp> findAllUsersWithActiveStatus();
 }

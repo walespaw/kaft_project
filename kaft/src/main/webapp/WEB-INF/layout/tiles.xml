@@ -16,16 +16,14 @@
 	<definition name="test" extends="base">
 		<put-attribute name="body" value="/WEB-INF/views/test.jsp" />
 	</definition>
+	<!-- activeUsers mapping -->
+	<definition name="activeUsers" extends="base">
+		<put-attribute name="body" value="/WEB-INF/views/activeUsers.jsp" />
+	</definition>
 	<!-- <definition name="registerForm" extends="base">
 		<put-attribute name="body" value="/WEB-INF/views/registerForm.jsp" />
 	</definition>
 	<definition name="profile" extends="base">
 		<put-attribute name="body" value="/WEB-INF/views/profile.jsp" />
-	</definition>
-	<definition name="spittles" extends="base">
-		<put-attribute name="body" value="/WEB-INF/views/spittles.jsp" />
-	</definition>
-	<definition name="spittle" extends="base">
-		<put-attribute name="body" value="/WEB-INF/views/spittle.jsp" />
 	</definition> -->
 </tiles-definitions>
