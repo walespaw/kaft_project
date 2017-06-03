@@ -25,6 +25,8 @@ public class TestLooger {
 		//ModelAndView model = new ModelAndView("activeUsers");
 		List<UserApp> list = userService.findAllUsersWithActiveStatus();
 		System.out.println(list.size());
+		System.out.println(System.getProperty("catalina.base"));
+		System.out.println(System.getProperty("user.home"));
 		list.stream().map(user-> user.getName()).forEach(System.out::println);;
 		
 		return new ModelAndView("activeUsers","list", list);
