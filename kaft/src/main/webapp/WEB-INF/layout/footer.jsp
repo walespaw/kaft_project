@@ -1,1 +1,1 @@
-Copyright &copy; Pawe&#322 Walesic
+<div id="footer">Copyright &copy; Pawe&#322 Walesic</div>

@@ -32,6 +32,13 @@ public class TestLooger {
 		return new ModelAndView("activeUsers","list", list);
 	}
 	
+	@RequestMapping(value="/allAppUsers", method=RequestMethod.GET)
+	public ModelAndView viewForAllUsers(){
+		List<UserApp> list = userService.findAll();
+		
+		return new ModelAndView("allAppUsers", "list", list);
+	}
+	
 	@RequestMapping(value="/test", method = RequestMethod.GET)
 	public String test(Model model){
 		

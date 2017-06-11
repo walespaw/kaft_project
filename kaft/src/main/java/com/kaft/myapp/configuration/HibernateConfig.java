@@ -2,6 +2,8 @@ package com.kaft.myapp.configuration;
 
 import java.util.Properties;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
@@ -29,38 +31,28 @@ public class HibernateConfig {
 	@Autowired
 	private Environment env;
 	
+	private DataSource dataSource;
+	
+		
 	@Bean
-	public DataSource getDataSource(){
-		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+	public DataSource getDataSource() {
+		//dziala z contextu tomcata
+		try {
+			Context cxt = new InitialContext();
+
+			dataSource = (DataSource) cxt.lookup("java:/comp/env/jdbc/postgres");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		/*DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName(env.getRequiredProperty("datasource.driver"));
 		dataSource.setUrl(env.getRequiredProperty("datasource.url"));
 		dataSource.setUsername(env.getRequiredProperty("datasource.username"));
-		dataSource.setPassword(env.getRequiredProperty("datasource.password"));
+		dataSource.setPassword(env.getRequiredProperty("datasource.password"));*/
 		return dataSource;
 	}
 	
-	/*@Bean
-	public LocalSessionFactoryBean getSessionFactory(){
-		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-		sessionFactory.setDataSource(getDataSource());
-		sessionFactory.setPackagesToScan(new String[]{"com.kaft.myapp.model"});
-		sessionFactory.setHibernateProperties(getHibernateProperties());
-		return sessionFactory;
-	}
-
-*/
-	/*@Bean
-	public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean(){
-		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-		em.setDataSource(getDataSource());
-		em.setPackagesToScan(new String[]{"com.kaft.myapp.model"});
-		
-		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-		em.setJpaVendorAdapter(vendorAdapter);
-		em.setJpaProperties(getHibernateProperties());
-		
-		return em;
-	}*/
 	
 	@Bean
 	public EntityManagerFactory entityManagerFactory() throws Exception{
