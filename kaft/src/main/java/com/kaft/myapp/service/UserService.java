@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 
 import com.kaft.myapp.model.UserApp;
 //import com.kaft.myapp.service.impl.UserServiceImpl;
+import com.kaft.myapp.model.dto.UserDto;
 
 public interface UserService {
 	public static final Logger logger = Logger.getLogger(UserService.class);
@@ -16,4 +17,6 @@ public interface UserService {
 	List<UserApp> findByEmailContainingIgnoreCase(String mail);
 	List<UserApp> getUserByNickOrName(String nick, String name);
 	List<UserApp> findAllUsersWithActiveStatus();
+	
+	List<UserDto> getAllUserDto();
 }

@@ -23,6 +23,12 @@
 	<definition name="allAppUsers" extends="base">
 		<put-attribute name="body" value="/WEB-INF/views/allAppUsers.jsp" />
 	</definition>
+	<definition name="allDtoUsers" extends="base">
+		<put-attribute name="body" value="/WEB-INF/views/allDtoUsers.jsp" />
+	</definition>
+	<definition name="users" extends="base">
+		<put-attribute name="body" value="/WEB-INF/views/users.jsp" />
+	</definition>
 	<!-- <definition name="registerForm" extends="base">
 		<put-attribute name="body" value="/WEB-INF/views/registerForm.jsp" />
 	</definition>

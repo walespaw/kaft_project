@@ -3,5 +3,15 @@ a{text-decoration: none; color: #000000;}
 a:HOVER {color: #00fa13;}
 ul{list-style-type: square;}
 li{display: block; padding-bottom: 10px;}
-#footer{display: block; margin: 0 auto; background: #000000; color: #ffffff; width: 1000px; height: 30px; padding-top: 10px; text-align: center;}
+li p{font-family: "Verdana", sans-serif, serif;}
+#footer{
+	display: block; 
+	margin: 0 auto; 
+	background: #000000; 
+	color: #ffffff; 
+	width: 1000px; 
+	height: 30px; 
+	padding-top: 10px; 
+	text-align: center;
+	}
 

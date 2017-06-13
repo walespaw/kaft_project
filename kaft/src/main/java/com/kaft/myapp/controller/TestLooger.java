@@ -39,6 +39,14 @@ public class TestLooger {
 		return new ModelAndView("allAppUsers", "list", list);
 	}
 	
+	@RequestMapping(value="/allDtoUsers", method=RequestMethod.GET)
+	public String viewForDtoUsers(Model model){
+		
+		model.addAttribute("list", userService.getAllUserDto());
+		
+		return "allDtoUsers";
+	}
+	
 	@RequestMapping(value="/test", method = RequestMethod.GET)
 	public String test(Model model){
 		

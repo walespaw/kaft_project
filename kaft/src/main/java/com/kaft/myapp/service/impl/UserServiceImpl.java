@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.kaft.myapp.dao.UsersRepository;
 import com.kaft.myapp.model.UserApp;
+import com.kaft.myapp.model.dto.UserDto;
 import com.kaft.myapp.service.UserService;
 
 @Service
@@ -64,5 +65,24 @@ public class UserServiceImpl implements UserService {
 		List<UserApp> result = listOfAll.stream().filter(user -> UserApp.UserStatus.ACTIVE.equals(user.getStatus())).collect(Collectors.toList()) ;
 		return result;
 	}
+
+	@Override
+	public List<UserDto> getAllUserDto() {
+		List<UserApp> listToDto = findAll();
+		List<UserDto> resultList = listToDto.stream().map(temp->{
+			UserDto tempDto = new UserDto();
+			tempDto.setId(temp.getId());
+			tempDto.setUserNick(temp.getUserNick());
+			tempDto.setName(temp.getName());
+			tempDto.setSecndName(temp.getSecondName());
+			tempDto.setLastName(temp.getLastName());
+			tempDto.setEmaill(temp.getEmail());
+			tempDto.setUserAddressess(temp.getUserAddress());
+			return tempDto;
+		}).collect(Collectors.toList());
+		return resultList;
+	}
+	
+	
 
 }
