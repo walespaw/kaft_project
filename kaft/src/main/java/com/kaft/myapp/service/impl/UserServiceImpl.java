@@ -7,7 +7,9 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kaft.myapp.dao.AddressRepository;
 import com.kaft.myapp.dao.UsersRepository;
+import com.kaft.myapp.model.UserAddress;
 import com.kaft.myapp.model.UserApp;
 import com.kaft.myapp.model.dto.UserDto;
 import com.kaft.myapp.service.UserService;
@@ -16,6 +18,9 @@ import com.kaft.myapp.service.UserService;
 public class UserServiceImpl implements UserService {
 	@Autowired
 	private UsersRepository usersRepository;
+	
+	@Autowired
+	private AddressRepository addresRepository;
 
 	// public static final Logger logger =
 	// Logger.getLogger(UserServiceImpl.class);
@@ -32,15 +37,15 @@ public class UserServiceImpl implements UserService {
 
 	public void update(UserApp userApp) {
 		// do nothing for now
-		logger.info("Updating the user " + userApp.getUserNick() + " at time "
+		logger.info("Updating the user with " +userApp.getId()+ " at time "
 				+ DateFormat.getInstance().format(System.currentTimeMillis()));
-		// usersRepository.save(userApp);
+		usersRepository.update(userApp.getId(), userApp.getUserNick(), userApp.getPassword(), userApp.getName(), userApp.getLastName(), userApp.getLastName(), userApp.getEmail());
 	}
 
-	public void delete(UserApp userApp) {
-		logger.info("Deleting the user " + userApp.getUserNick() + " at time "
+	public void delete(int id) {
+		logger.info("Deleting the user with " + id + " at time "
 				+ DateFormat.getInstance().format(System.currentTimeMillis()));
-		usersRepository.delete(userApp);
+		usersRepository.delete(id);
 	}
 
 	public List<UserApp> findAll() {
@@ -73,6 +78,7 @@ public class UserServiceImpl implements UserService {
 			UserDto tempDto = new UserDto();
 			tempDto.setId(temp.getId());
 			tempDto.setUserNick(temp.getUserNick());
+			tempDto.setPassword(temp.getPassword());
 			tempDto.setName(temp.getName());
 			tempDto.setSecndName(temp.getSecondName());
 			tempDto.setLastName(temp.getLastName());
@@ -82,6 +88,19 @@ public class UserServiceImpl implements UserService {
 		}).collect(Collectors.toList());
 		return resultList;
 	}
+
+	@Override
+	public void delete(UserApp userApp) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void saveUserAndAddress(UserApp user, UserAddress address) {
+		usersRepository.save(user);
+		addresRepository.save(address);
+	}
+	
 	
 	
 

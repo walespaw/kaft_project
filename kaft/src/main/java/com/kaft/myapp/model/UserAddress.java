@@ -53,6 +53,14 @@ public class UserAddress implements Serializable {
 		this.flatNumber = flatNumber;
 		this.userApp = userApp;
 	}
+		
+	public long getAddressId() {
+		return addressId;
+	}
+
+	public void setAddressId(long addressId) {
+		this.addressId = addressId;
+	}
 
 	public String getCountry() {
 		return country;

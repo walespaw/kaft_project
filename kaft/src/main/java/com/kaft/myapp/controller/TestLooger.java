@@ -1,7 +1,9 @@
 package com.kaft.myapp.controller;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kaft.myapp.model.UserAddress;
 import com.kaft.myapp.model.UserApp;
 import com.kaft.myapp.model.UserApp.UserStatus;
+import com.kaft.myapp.model.UserRole;
 import com.kaft.myapp.service.UserService;
 
 @Controller
@@ -50,9 +53,22 @@ public class TestLooger {
 	@RequestMapping(value="/test", method = RequestMethod.GET)
 	public String test(Model model){
 		
-		//UserApp userApp = new UserApp();
+		/*UserApp userApp = new UserApp();
+		userApp.setName("Paweł");
+		userApp.setUserNick("pawel");
+		userApp.setPassword("password");
+		userApp.setLastName("Gaweł");
+		userApp.setSecondName("Ga");
+		userApp.setEmail("pawel@test.pl");
+		userApp.setStatus(UserStatus.ACTIVE);
 		
+		UserAddress address = new UserAddress("Poland", "abc", "27-415","def", 12, 0, userApp);
+		
+		Set<UserAddress> addressSet = new HashSet<UserAddress>();*/
+		
+		//addressSet.add(address);
 		model.addAttribute("testLogger", new String("Strona testowa"));
+		//userService.save(userApp);
 		//userService.update(null);
 		return "test";
 	}

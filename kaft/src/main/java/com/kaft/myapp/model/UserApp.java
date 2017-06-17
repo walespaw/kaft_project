@@ -28,6 +28,8 @@ public class UserApp implements Serializable {
 	public int Id;
 	@Column(name = "UserNick", nullable = false)
 	private String userNick;
+	@Column(name = "Password", nullable = false)
+	private String password;
 	@Column(name = "Name")
 	private String name;
 	@Column(name = "LastName")
@@ -36,37 +38,41 @@ public class UserApp implements Serializable {
 	private String secondName;
 	@Column(name = "Email")
 	private String email;
-	
-	public enum UserStatus{INACTIVE, ACTIVE}
-	
+
+	public enum UserStatus {
+		INACTIVE, ACTIVE
+	}
+
 	@Enumerated(EnumType.STRING)
 	private UserStatus status;
-	
-	
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="userApp")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userApp")
 	private Set<UserAddress> userAddress = new HashSet<UserAddress>(0);
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.userApp", cascade = CascadeType.ALL)
 	private Set<UserRole> userRoles = new HashSet<UserRole>(0);
 
-	public UserApp(){}
-	
-	public UserApp(String userNick, String name, String lastName, String secondName, String email, UserStatus status){
+	public UserApp() {
+	}
+
+	public UserApp(String userNick, String password, String name, String lastName, String secondName, String email,
+			UserStatus status) {
 		this.userNick = userNick;
+		this.password = password;
 		this.name = name;
 		this.lastName = lastName;
 		this.secondName = secondName;
 		this.email = email;
-		
+
 		this.status = status;
 	}
 
-	public UserApp(String userNick, String name, String lastName, String secondName, String email,
+	public UserApp(String userNick, String password, String name, String lastName, String secondName, String email,
 			Set<UserAddress> userAddress, Set<UserRole> userRoles, UserStatus status) {
-				
+
 		this.userNick = userNick;
 		this.name = name;
+		this.password = password;
 		this.lastName = lastName;
 		this.secondName = secondName;
 		this.email = email;
@@ -81,6 +87,14 @@ public class UserApp implements Serializable {
 
 	public void setId(int id) {
 		Id = id;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getUserNick() {
@@ -145,6 +159,19 @@ public class UserApp implements Serializable {
 
 	public void setStatus(UserStatus status) {
 		this.status = status;
+	}
+
+	public boolean isNew() {
+		if (getId() == 0) {
+			return true;
+		} else {
+			return false;
+		}
+		/*
+		 * Integer notSimpleint = new Integer(this.Id);
+		 * 
+		 * return (notSimpleint == null );
+		 */
 	}
 
 }

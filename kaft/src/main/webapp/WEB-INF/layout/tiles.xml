@@ -11,7 +11,7 @@
 	<definition name="home" extends="base">
 		<put-attribute name="body" value="/WEB-INF/views/home.jsp" />
 	</definition>
-	
+
 	<!-- dodane do testu -->
 	<definition name="test" extends="base">
 		<put-attribute name="body" value="/WEB-INF/views/test.jsp" />
@@ -29,10 +29,11 @@
 	<definition name="users" extends="base">
 		<put-attribute name="body" value="/WEB-INF/views/users.jsp" />
 	</definition>
-	<!-- <definition name="registerForm" extends="base">
+	<definition name="registerForm" extends="base">
 		<put-attribute name="body" value="/WEB-INF/views/registerForm.jsp" />
 	</definition>
-	<definition name="profile" extends="base">
-		<put-attribute name="body" value="/WEB-INF/views/profile.jsp" />
-	</definition> -->
+	<!-- <definition name="registerForm" extends="base"> <put-attribute name="body" 
+		value="/WEB-INF/views/registerForm.jsp" /> </definition> <definition name="profile" 
+		extends="base"> <put-attribute name="body" value="/WEB-INF/views/profile.jsp" 
+		/> </definition> -->
 </tiles-definitions>

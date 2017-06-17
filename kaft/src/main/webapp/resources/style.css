@@ -2,8 +2,10 @@ body{display: block; margin: 0 auto; width: 1000px;}
 a{text-decoration: none; color: #000000;}
 a:HOVER {color: #00fa13;}
 ul{list-style-type: square;}
-li{display: block; padding-bottom: 10px;}
-li p{font-family: "Verdana", sans-serif, serif;}
+li{display: block; padding-bottom: 10px; border: 1px solid; border-radius: 5px;margin-bottom: 5px;}
+li p{font-family: "Verdana", sans-serif, serif; clear: both;}
+.user_data{width: 600px; display: block; float: left; position: relative; margin-left: 10px;}
+.user_data_change{width: 250px; position: relative; float: right;}
 #footer{
 	display: block; 
 	margin: 0 auto; 
@@ -14,4 +16,3 @@ li p{font-family: "Verdana", sans-serif, serif;}
 	padding-top: 10px; 
 	text-align: center;
 	}
-

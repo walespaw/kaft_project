@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.kaft.myapp.model.UserAddress;
 import com.kaft.myapp.model.UserApp;
 //import com.kaft.myapp.service.impl.UserServiceImpl;
 import com.kaft.myapp.model.dto.UserDto;
@@ -19,4 +20,5 @@ public interface UserService {
 	List<UserApp> findAllUsersWithActiveStatus();
 	
 	List<UserDto> getAllUserDto();
+	void saveUserAndAddress(UserApp user, UserAddress address);
 }

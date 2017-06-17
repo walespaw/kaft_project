@@ -8,6 +8,7 @@ import com.kaft.myapp.model.UserAddress;
 public class UserDto{
 	private int Id;
 	private String userNick;
+	private String password;
 	private String name;
 	private String lastName;
 	private String secndName;
@@ -16,11 +17,12 @@ public class UserDto{
 
 	public UserDto() {}
 
-	public UserDto(int id, String userNick, String name, String lastName, String secndName, String emaill,
+	public UserDto(int id, String password, String userNick, String name, String lastName, String secndName, String emaill,
 			Set<UserAddress> userAddressess) {
 		super();
 		Id = id;
 		this.userNick = userNick;
+		this.password = password;
 		this.name = name;
 		this.lastName = lastName;
 		this.secndName = secndName;
@@ -42,6 +44,15 @@ public class UserDto{
 
 	public void setUserNick(String userNick) {
 		this.userNick = userNick;
+	}
+	
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getName() {
