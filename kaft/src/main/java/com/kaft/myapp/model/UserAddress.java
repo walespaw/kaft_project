@@ -13,6 +13,9 @@ import javax.persistence.ManyToOne;
 
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "UserAddress")
 public class UserAddress implements Serializable {
@@ -36,7 +39,9 @@ public class UserAddress implements Serializable {
 	@Column(name = "FlatNumber")
 	private int flatNumber;
 	//
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JsonBackReference
+	//@JsonIgnoreProperties("userAddress")
 	@JoinColumn(name = "UserId", nullable = false)
 	private UserApp userApp;
 	

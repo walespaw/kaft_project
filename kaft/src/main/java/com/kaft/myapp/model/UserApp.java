@@ -15,6 +15,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "UsersApp")
 public class UserApp implements Serializable {
@@ -46,7 +52,9 @@ public class UserApp implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private UserStatus status;
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "userApp")
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "userApp")
+	@JsonManagedReference
+	//@JsonIgnoreProperties("userApp")
 	private Set<UserAddress> userAddress = new HashSet<UserAddress>(0);
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.userApp", cascade = CascadeType.ALL)

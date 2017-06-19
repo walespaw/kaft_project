@@ -1,6 +1,7 @@
 package com.kaft.myapp.controller;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.github.javafaker.Faker;
@@ -22,6 +24,7 @@ import com.kaft.myapp.model.UserAddress;
 import com.kaft.myapp.model.UserApp;
 import com.kaft.myapp.model.UserApp.UserStatus;
 import com.kaft.myapp.model.dto.UserAndAddressFormPassDto;
+import com.kaft.myapp.model.dto.UserDto;
 import com.kaft.myapp.service.UserService;
 
 @Controller
@@ -89,31 +92,17 @@ public class UsersController {
 		userToFill.setStreet(fakeData.address().streetName());
 		userToFill.setStreetNumber(5);
 		userToFill.setFlatNumber(1);
-		/*
-		 * 
-		UserApp user = new UserApp();
-		user.setUserNick(fakeData.name().username());
-		user.setPassword(String.valueOf(new Random().nextInt(10)));
-		user.setName(fakeData.name().firstName());
-		user.setLastName(fakeData.name().lastName());
-		user.setSecondName(fakeData.gameOfThrones().dragon());
-		user.setEmail(fakeData.name().firstName().toLowerCase()+fakeData.name().lastName().toLowerCase()+"@gmail.com");
-		user.setStatus(UserStatus.ACTIVE);
-		
-		UserAddress address = new UserAddress();
-		address.setCountry(fakeData.address().country());
-		address.setCity(fakeData.address().city());
-		address.setZipCode(fakeData.address().zipCode().toString());
-		address.setStreet(fakeData.address().streetName());
-		address.setStreetNumber(5);
-		address.setFlatNumber(1);
-		
-				
-		model.addAttribute("userForm", user);
-		model.addAttribute("addressForm", address);
-		*/
+	
 		model.addAttribute("userForm", userToFill);
 		return "registerForm";
+	}
+	
+	@RequestMapping(value="/usersJson")
+	@ResponseBody
+	public List<UserDto> convertToJson(){
+		List<UserDto> result = userService.getAllUserDto();
+		
+		return result;
 	}
 
 }
