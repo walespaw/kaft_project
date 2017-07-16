@@ -2,25 +2,39 @@ package com.kaft.myapp.service.impl;
 
 import java.text.DateFormat;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kaft.myapp.dao.AddressRepository;
+import com.kaft.myapp.dao.UserRoleRepository;
 import com.kaft.myapp.dao.UsersRepository;
 import com.kaft.myapp.model.UserAddress;
 import com.kaft.myapp.model.UserApp;
+import com.kaft.myapp.model.UserRole;
 import com.kaft.myapp.model.dto.UserDto;
 import com.kaft.myapp.service.UserService;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
+	
 	@Autowired
 	private UsersRepository usersRepository;
 	
 	@Autowired
 	private AddressRepository addresRepository;
+	
+	@Autowired
+	private UserRoleRepository userRoleRepository;
+	
 
 	// public static final Logger logger =
 	// Logger.getLogger(UserServiceImpl.class);
@@ -102,6 +116,40 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	
+	@Override
+	public UserApp findByUserNick(String nick) {
+		return usersRepository.findByUserNick(nick);
+	}
+
+	public List<UserRole> findUserRoleByUser(UserApp user) {
+		return userRoleRepository.findByPkUserApp(user);
+	}
 	
+	@Override
+	public List<UserRole> findUserRoleById(int id) {
+		// TODO Auto-generated method stub
+		return usersRepository.findUserRolesById(id);
+	}
+	
+	//Security
+	@Transactional(readOnly=true)
+	@Override
+	public UserDetails loadUserByUsername(String arg0) throws UsernameNotFoundException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public User buildUserForAuthentication(UserApp user, List<GrantedAuthority> authorities) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<GrantedAuthority> buildUserAuthority(Set<UserRole> userRoles) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

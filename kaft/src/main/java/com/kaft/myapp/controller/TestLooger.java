@@ -52,63 +52,23 @@ public class TestLooger {
 	
 	@RequestMapping(value="/test", method = RequestMethod.GET)
 	public String test(Model model){
+		UserApp userThatFound = userService.findByUserNick("pawel");
+		System.out.println(userThatFound.getEmail());
 		
-		/*UserApp userApp = new UserApp();
-		userApp.setName("Paweł");
-		userApp.setUserNick("pawel");
-		userApp.setPassword("password");
-		userApp.setLastName("Gaweł");
-		userApp.setSecondName("Ga");
-		userApp.setEmail("pawel@test.pl");
-		userApp.setStatus(UserStatus.ACTIVE);
+		List<UserRole> rolesThatFound = userService.findUserRoleByUser(userThatFound);
+		rolesThatFound.forEach(item->System.out.println(item.getRole().getRoleName()));
 		
-		UserAddress address = new UserAddress("Poland", "abc", "27-415","def", 12, 0, userApp);
+		/*for(UserRole role: rolesThatFound){
+			System.out.println(role.getRole().getRoleName());
+		}*/
 		
-		Set<UserAddress> addressSet = new HashSet<UserAddress>();*/
+		List<UserRole> rolesFoundById = userService.findUserRoleById(5);
 		
-		//addressSet.add(address);
+		rolesFoundById.forEach(item->System.out.println("By id:"+item.getRole().getRoleName()));
+		
 		model.addAttribute("testLogger", new String("Strona testowa"));
-		//userService.save(userApp);
-		//userService.update(null);
+		
 		return "test";
 	}
 	
-	/*
-	userApp.setName("Paweł");
-	userApp.setUserNick("pawel");
-	userApp.setLastName("Gaweł");
-	userApp.setSecondName("Ga");
-	userApp.setEmail("pawel@test.pl");
-	userApp.setStatus(UserStatus.ACTIVE);
-	
-	UserAddress address = new UserAddress("Poland", "abc", "27-415","def", 12, 0, userApp);
-	Set<UserAddress> addressSet = new HashSet<UserAddress>();
-	addressSet.add(address);
-	
-	userApp.setUserAddress(addressSet);*/
-	/*userApp.setName("Marcin");
-	userApp.setUserNick("marcin");
-	userApp.setLastName("");
-	userApp.setSecondName("Ga");
-	userApp.setEmail("marcin@test.pl");
-	userApp.setStatus(UserStatus.ACTIVE);
-	
-	UserAddress address = new UserAddress("Poland", "abc", "12-345","Abc", 12, 0, userApp);
-	Set<UserAddress> addressSet = new HashSet<UserAddress>();
-	addressSet.add(address);
-	
-	userApp.setUserAddress(addressSet);*/
-	/*userApp.setName("Michał");
-	userApp.setUserNick("michal");
-	userApp.setLastName("Pałaszkiewicz");
-	userApp.setSecondName("Am");
-	userApp.setEmail("michal@test.pl");
-	userApp.setStatus(UserStatus.ACTIVE);
-	
-	UserAddress address = new UserAddress("Poland", "abc", "27-564","Poznan", 12, 0, userApp);
-	Set<UserAddress> addressSet = new HashSet<UserAddress>();
-	addressSet.add(address);
-	
-	userApp.setUserAddress(addressSet);
-	userService.save(userApp);*/
 }

@@ -1,5 +1,6 @@
 package com.kaft.myapp.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import javax.persistence.AssociationOverride;
@@ -17,7 +18,7 @@ import javax.persistence.Transient;
 			joinColumns = @JoinColumn(name = "UserId")),
 		@AssociationOverride(name = "pk.role", 
 			joinColumns = @JoinColumn(name = "IdRole")) })
-public class UserRole {
+public class UserRole implements Serializable{
 	
 	@EmbeddedId
 	private UserRoleId pk;

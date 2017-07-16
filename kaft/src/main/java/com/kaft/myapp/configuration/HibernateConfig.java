@@ -26,7 +26,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages="com.kaft.myapp.dao") //springdata
 @PropertySource(value={"classpath:application.properties"})
-@ComponentScan(value={"com.kaft.myapp"})
+//@ComponentScan(value={"com.kaft.myapp"})
 public class HibernateConfig {
 	@Autowired
 	private Environment env;

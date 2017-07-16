@@ -21,7 +21,7 @@ public class RoleApp {
 	@Column(name="RoleName")
 	private String roleName;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy="pk.role")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy="pk.role")
 	private Set<UserRole> userRoles = new HashSet<UserRole>(0);
 	
 	

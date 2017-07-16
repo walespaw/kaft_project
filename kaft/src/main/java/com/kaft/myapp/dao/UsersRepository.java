@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.kaft.myapp.model.UserApp;
+import com.kaft.myapp.model.UserRole;
 
 @Repository
 public interface UsersRepository extends JpaRepository<UserApp, Integer> {
@@ -30,5 +31,9 @@ public interface UsersRepository extends JpaRepository<UserApp, Integer> {
 			+ "where u.Id = ?1")
 	public void update(int userID, String nick, String password, String name, String lastName, String secondName,
 			String email);
-
+	
+	public UserApp findByUserNick(String usernick);
+	
+	@Query("from UserRole where UserId = ?1")
+	public List<UserRole> findUserRolesById(int id);
 }
